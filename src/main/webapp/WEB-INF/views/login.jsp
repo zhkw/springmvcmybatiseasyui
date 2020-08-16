@@ -81,18 +81,24 @@ $("#btnLogin").click(function(){
 	
     	$.ajax( {
     	type : "post",
-		url : url,
-		contentType : "text/html",
+		url : "user/login",
+		data:{
+    		username:LOGINNAME,
+			password:PASSWORD
+			},
+		dataType: "json",
 		error : function(event,request, settings) {
 			$.messager.alert("提示消息", "请求失败!", "info");
 		},
-		success : function(data) { 
-			if(data.total>0){
-				window.location.href="main.jsp";   
-			}
-			else{
-				$.messager.alert("提示消息", "用户名或密码错误!", "info");
-			}	
+		success : function(r) {
+    		console.info(r.msg);
+			$.messager.alert("提示消息", r.msg, "info");
+			// if(data.total>0){
+			// 	window.location.href="hello.jsp";
+			// }
+			// else{
+			// 	$.messager.alert("提示消息", "用户名或密码错误!", "info");
+			// }
 		}
 	});	
 });
